@@ -1,3 +1,3 @@
-#Formal model of DFTL algorithm
+#Formal model DFTL algorithm and verfity it.
 
-It is the source code of formal model of DFTL algorithm.
+It is the source code of  DFTL algorithm.And it is target it to prove it.

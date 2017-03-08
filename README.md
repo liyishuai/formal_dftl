@@ -1,3 +1,4 @@
-#Formal model DFTL algorithm and verfity it.
+# Formal modeling and verification of DFTL algorithm
 
-It is the source code of  DFTL algorithm.And it is target it to prove it.
+This project is to formalize the DFTL algorithm
+and prove its functional correctness.

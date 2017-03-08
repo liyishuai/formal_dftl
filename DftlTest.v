@@ -17,7 +17,7 @@ Require Import Monad.
 Require Import Params.
 Require Import Nand.
 Require Import Data.
-Require Import Dftl0.
+Require Import Dftl2.
 
 Open Scope list_scope.
 

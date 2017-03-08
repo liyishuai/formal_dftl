@@ -139,36 +139,140 @@ Print modulo.
 Locate "/".
 Print div.
 
-Axiom addr_neq_trans_implies_neq :
+(* Axiom addr_neq_trans_implies_neq : *)
+(*   forall addr addr' lbn off lbn' off', *)
+(*     addr <> addr' *)
+(*     -> lpn_to_lbn_off addr = (lbn, off) *)
+(*     -> lpn_to_lbn_off addr' = (lbn', off') *)
+(*     -> lbn <> lbn' \/ ((lbn = lbn') /\ off <> off'). *)
+
+Lemma addr_neq_trans_implies_neq :
   forall addr addr' lbn off lbn' off',
     addr <> addr'
     -> lpn_to_lbn_off addr = (lbn, off)
     -> lpn_to_lbn_off addr' = (lbn', off')
     -> lbn <> lbn' \/ ((lbn = lbn') /\ off <> off').
+Proof.
+  intros.
+  destruct (beq_nat lbn lbn') eqn:Hlbn.
+  - apply beq_true_eq in Hlbn.
+    right; split; auto; intro.
+    apply H.
+    rewrite div_mod with (y := PAGES_PER_BLOCK);
+      try (intro Heq; inversion Heq).
+    replace lbn with (addr / PAGES_PER_BLOCK) in *;
+      try (inversion H0; subst; reflexivity).
+    replace off with (addr mod PAGES_PER_BLOCK) in *;
+      try (inversion H0; subst; reflexivity).
+    replace lbn' with (addr' / PAGES_PER_BLOCK) in *;
+      try (inversion H1; subst; reflexivity).
+    replace off' with (addr' mod PAGES_PER_BLOCK) in *;
+      try (inversion H1; subst; reflexivity).
+    rewrite <- Hlbn.
+    rewrite <- H2.
+    apply div_mod.
+    intro.
+    inversion H3.
+  - left.
+    apply beq_false_neq.
+    assumption.
+Qed.
 
-Axiom valid_lpn_implies_valid_off :
+(* Axiom valid_lpn_implies_valid_off : *)
+(*   forall addr lbn off, *)
+(*     bvalid_sector_no addr = true *)
+(*     -> lpn_to_lbn_off addr = (lbn, off) *)
+(*     -> bvalid_page_off off = true. *)
+
+Lemma valid_lpn_implies_valid_off :
   forall addr lbn off,
     bvalid_sector_no addr = true
     -> lpn_to_lbn_off addr = (lbn, off)
     -> bvalid_page_off off = true.
+Proof.
+  intros.
+  replace off with (addr mod PAGES_PER_BLOCK).
+  - apply lt_blt_true.
+    apply Nat.mod_small_iff;
+      try (intro Heq; inversion Heq).
+    apply Nat.mod_mod;
+      try (intro Heq; inversion Heq).
+  - inversion H0; auto.
+Qed.
 
-Axiom valid_lpn_implies_valid_lbn :
+(* Axiom valid_lpn_implies_valid_lbn : *)
+(*   forall addr lbn off, *)
+(*     bvalid_sector_no addr = true *)
+(*     -> lpn_to_lbn_off addr = (lbn, off) *)
+(*     -> bvalid_logical_block_no lbn = true. *)
+
+Lemma valid_lpn_implies_valid_lbn :
   forall addr lbn off,
     bvalid_sector_no addr = true
     -> lpn_to_lbn_off addr = (lbn, off)
     -> bvalid_logical_block_no lbn = true.
+Proof.
+  intros.
+  replace lbn with (addr / PAGES_PER_BLOCK).
+  - apply lt_blt_true.
+    apply Nat.div_lt_upper_bound;
+      try (intro Heq; inversion Heq).
+    apply blt_true_lt.
+    rewrite Nat.mul_comm.
+    unfold bvalid_sector_no in H.
+    unfold NUM_OF_SECTORS in H.
+    assumption.
+  - inversion H0; auto.
+Qed.
 
-Axiom invalid_lpn_implies_valid_off :
+
+Lemma invalid_lpn_implies_valid_off :
   forall addr lbn off,
     bvalid_sector_no addr = false
     -> lpn_to_lbn_off addr = (lbn, off)
     -> bvalid_page_off off = true.
+Proof.
+  intros.
+  replace off with (addr mod PAGES_PER_BLOCK).
+  - apply lt_blt_true.
+    apply Nat.mod_small_iff;
+      try (intro Heq; inversion Heq).
+    apply Nat.mod_mod;
+      try (intro Heq; inversion Heq).
+  - inversion H0; auto.
+Qed.
 
-Axiom invalid_lpn_implies_invalid_lbn :
+Lemma invalid_lpn_implies_invalid_lbn :
   forall addr lbn off,
     bvalid_sector_no addr = false
     -> lpn_to_lbn_off addr = (lbn, off)
     -> bvalid_logical_block_no lbn = false.
+Proof.
+  intros.
+  replace lbn with (addr / PAGES_PER_BLOCK).
+  - unfold bvalid_logical_block_no.
+    apply le_blt_false.
+    apply Nat.div_le_lower_bound;
+      try (intro Heq; inversion Heq).
+    apply blt_false_le.
+    rewrite Nat.mul_comm.
+    unfold bvalid_sector_no in H.
+    unfold NUM_OF_SECTORS in H.
+    assumption.
+  - inversion H0; auto.
+Qed.
+
+(* Axiom invalid_lpn_implies_valid_off : *)
+(*   forall addr lbn off, *)
+(*     bvalid_sector_no addr = false *)
+(*     -> lpn_to_lbn_off addr = (lbn, off) *)
+(*     -> bvalid_page_off off = true. *)
+
+(* Axiom invalid_lpn_implies_invalid_lbn : *)
+(*   forall addr lbn off, *)
+(*     bvalid_sector_no addr = false *)
+(*     -> lpn_to_lbn_off addr = (lbn, off) *)
+(*     -> bvalid_logical_block_no lbn = false. *)
 
 Definition flash_device := prod chip FTL.
 

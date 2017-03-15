@@ -80,4 +80,4 @@ destruct (check_block_is_full curbi) eqn:HFUL.
   destruct Hbit as [bi'' Hbit''].
   rewrite Hbit''.
   rewrite <- HeqHf.
-  
+Admitted.

@@ -106,7 +106,7 @@ destruct (beq_nat sec0 sec) eqn:HX.
     }
   unfold fld_read.
   unfold fld_read in HX.
-  
+Admitted.
 
 Lemma fld_write_inv:
   forall fld hdd sec d hdd',
@@ -159,7 +159,6 @@ Lemma simu_mult_steps_progress:
 Proof.
 Admitted.
 
-`
 Lemma simu_mult_steps_preservation:
   forall cmd hdd hdd' bh fld fld',
     Inv fld ->

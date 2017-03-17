@@ -9,6 +9,9 @@
 (*           Bihong Zhang <sa614257@mail.ustc.edu.cn>                         *)
 (*                                     School of Software Engineering, USTC   *)
 (*                                                                            *)
+(*           Yishuai Li <lyishuai@mail.ustc.edu.cn>                           *)
+(*                                         School of the Gifted Young, USTC   *)
+(*                                                                            *)
 (* ************************************************************************** *)
 
 Require Import List.

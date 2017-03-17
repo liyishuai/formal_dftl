@@ -9,7 +9,10 @@
 (*           Bihong Zhang <sa614257@mail.ustc.edu.cn>                         *)
 (*                                     School of Software Engineering, USTC   *)
 (*                                                                            *)
-(* **************************************X************************************ *)
+(*           Yishuai Li <lyishuai@mail.ustc.edu.cn>                           *)
+(*                                         School of the Gifted Young, USTC   *)
+(*                                                                            *)
+(* ************************************************************************** *)
 
 
 Require Import LibEx.
@@ -106,7 +109,11 @@ destruct (beq_nat sec0 sec) eqn:HX.
     }
   unfold fld_read.
   unfold fld_read in HX.
-  
+  (* TO DO*)
+  skip.
+-
+  skip.
+Qed.
 
 Lemma fld_write_inv:
   forall fld hdd sec d hdd',

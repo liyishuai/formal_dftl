@@ -61,7 +61,6 @@ Proof.
   destruct (nat_eq_dec pbn pbn'); auto.
 Qed.
 
-
 Lemma nand_erase_block_spec: 
   forall c pbn b,
     bvalid_block_no pbn = true

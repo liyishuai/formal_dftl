@@ -19,6 +19,24 @@ Definition FTL_read_data (c:chip) (f:FTL) (lpn:page_no) :option data :=
       | None => None
   end.
 
+
+Lemma ftl_write_spec_1 : forall (c : chip) (f : FTL) (lpn:page_no) (d : data),
+       Inv c f ->
+       valid_logic_page_no lpn ->
+       exists (c' : chip) (f' : FTL),
+         FTL_write c f lpn d = Some (c', f').
+Proof.
+Admitted.
+
+Lemma ftl_write_spec_2 : forall (c : chip) (f : FTL) (lpn:page_no) (d : data),
+       Inv c f ->
+       valid_logic_page_no lpn ->
+       exists (c' : chip) (f' : FTL),
+         FTL_write c f lpn d = Some (c', f') /\
+         (exists c''  f'',FTL_read c' f' lpn = Some (d,(c'',f''))).
+Proof.
+Admitted.
+
 Lemma ftl_write_spec : forall (c : chip) (f : FTL) (lpn:page_no) (d : data),
        Inv c f ->
        valid_logic_page_no lpn ->

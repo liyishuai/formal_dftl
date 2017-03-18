@@ -84,7 +84,6 @@ Proof.
 Qed.
 
 (* Lemma Inv_init: forall ftl,fld_init = Some (nand_init,ftl) -> R hdd_init (nand_init,ftl) .  *)
-
  
 Lemma fld_write_R_prservation:
   forall fld hdd sec d hdd' fld',
@@ -378,7 +377,6 @@ Admitted.
   (* destruct pbn. *)
   (* { *)
     
-Admitted.
   (* destruct pbn. *)
  (*  { *)
  (*    simpl in H0. *)

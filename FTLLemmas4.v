@@ -189,4 +189,4 @@ destruct (check_block_is_full curbi) eqn:HFUL.
       rewrite Hvalid'.
       simpl.
       skip.
-      
+Admitted.

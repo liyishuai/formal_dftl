@@ -89,10 +89,10 @@ Definition I_pbn_fbq_valid := forall (pbn: block_no),
                     -> valid_block_no pbn. 
 
 (* ## I5: every pbn in freebq is of "INVALID" or "ERASED" state.*)
-Definition I_pbn_fbq_state := forall (pbn: block_no) bi,
+Definition I_pbn_fbq_state := forall (pbn: block_no),
                                 fbq_in fbq pbn = true
-                                -> bit_get bit pbn = Some bi 
-                                -> bi_state bi = bs_invalid \/ bi_state bi = bs_erased.
+                                -> (exists bi,bit_get bit pbn = Some bi 
+                                /\  (bi_state bi = bs_invalid \/ bi_state bi = bs_erased)).
 
 (* ## I6: every two pbns in FREEBQ are different *)
 Definition I_pbn_fbq_distinguishable:= forall i i' pbn pbn',

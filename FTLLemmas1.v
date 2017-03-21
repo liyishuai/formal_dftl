@@ -132,6 +132,7 @@ exists (nand_init ,ftl).
 reflexivity.
 assert (HS3:num < 16).
   apply (find_gtd_init_spec2 lpn H0  num HS2').
+unfold GTD_LENGTH.
 skip.
 Qed.
 

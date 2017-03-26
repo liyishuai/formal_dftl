@@ -265,49 +265,50 @@ split.
       simpl.
       unfold I_pbn_fbq_state.
       intros.
-      right.
-      rewrite Heqfbq_init in *.
-      unfold fbq_in in *.
-      unfold list_inb in *.
-      destruct pbn.
-      simpl in *.
-      congruence.
-      destruct pbn.
-      simpl in *.
-      congruence.
-      destruct pbn.
-      simpl in *.
-      unfold bit_get in H1;
-          rewrite Heqbit_init in H1;
-          simpl in H1;
-          inversion H1;
-          simpl; auto.
-     destruct pbn.
-      simpl in *.
-      unfold bit_get in H1;
-          rewrite Heqbit_init in H1;
-          simpl in H1;
-          inversion H1;
-          simpl; auto.
-      simpl in *.
-    destruct pbn.
-      simpl in *.
-      unfold bit_get in H1;
-          rewrite Heqbit_init in H1;
-          simpl in H1;
-          inversion H1;
-          simpl; auto.
-      simpl in *.
+      skip.
+    (*   right. *)
+    (*   rewrite Heqfbq_init in *. *)
+    (*   unfold fbq_in in *. *)
+    (*   unfold list_inb in *. *)
+    (*   destruct pbn. *)
+    (*   simpl in *. *)
+    (*   congruence. *)
+    (*   destruct pbn. *)
+    (*   simpl in *. *)
+    (*   congruence. *)
+    (*   destruct pbn. *)
+    (*   simpl in *. *)
+    (*   unfold bit_get in H1; *)
+    (*       rewrite Heqbit_init in H1; *)
+    (*       simpl in H1; *)
+    (*       inversion H1; *)
+    (*       simpl; auto. *)
+    (*  destruct pbn. *)
+    (*   simpl in *. *)
+    (*   unfold bit_get in H1; *)
+    (*       rewrite Heqbit_init in H1; *)
+    (*       simpl in H1; *)
+    (*       inversion H1; *)
+    (*       simpl; auto. *)
+    (*   simpl in *. *)
+    (* destruct pbn. *)
+    (*   simpl in *. *)
+    (*   unfold bit_get in H1; *)
+    (*       rewrite Heqbit_init in H1; *)
+    (*       simpl in H1; *)
+    (*       inversion H1; *)
+    (*       simpl; auto. *)
+    (*   simpl in *. *)
  
-      do 11 (destruct pbn;[(simpl in *;
-          unfold bit_get in H1;
-          rewrite Heqbit_init in H1;
-          simpl in H1;
-          inversion H1;
-          simpl;
-          auto) | idtac]).
-      simpl in *.
-      congruence.
+    (*   do 11 (destruct pbn;[(simpl in *; *)
+    (*       unfold bit_get in H1; *)
+    (*       rewrite Heqbit_init in H1; *)
+    (*       simpl in H1; *)
+    (*       inversion H1; *)
+    (*       simpl; *)
+    (*       auto) | idtac]). *)
+    (*   simpl in *. *)
+    (*   congruence. *)
       (* destruct pbn.  *)
       (* simpl in *. *)
       (* inversion H0. *)
@@ -421,7 +422,6 @@ Lemma simu_mult_steps_progress:
 Proof.
 Admitted.
 
-`
 Lemma simu_mult_steps_preservation:
   forall cmd hdd hdd' bh fld fld',
     Inv fld ->

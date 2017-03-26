@@ -432,7 +432,6 @@ Proof.
       solvebnat.
     destruct (H2 (refl_equal _)) as [H3 [H4 H5]].
     subst.
-    subst a.
     simpl; split; trivial.
   simpl in H.
   destruct (@list_get_list_append_some_elim _ _ _ _ _ H) as [H1 H2].

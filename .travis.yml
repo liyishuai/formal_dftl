@@ -1,0 +1,21 @@
+language: c
+dist: trusty
+sudo: required
+
+os:
+    - linux
+    - osx
+
+install:
+    case $TRAVIS_OS_NAME in
+    osx)
+    brew update &&
+    brew install coq ;;
+    linux)
+    wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin &&
+    opam install coq -y &&
+    eval $(opam config env) ;;
+    esac
+script:
+    coq_makefile -f _CoqProject -o Makefile &&
+    make -j > /dev/null

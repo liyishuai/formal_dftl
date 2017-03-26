@@ -1,3 +1,5 @@
-#Formal model DFTL algorithm and verfity it.
+# Formal modeling and verification of DFTL algorithm
+[![Build Status](https://travis-ci.org/liyishuai/formal_dftl.svg?branch=master)](https://travis-ci.org/liyishuai/formal_dftl)
 
-It is the source code of  DFTL algorithm.And it is target it to prove it.
+This project is to formalize the DFTL algorithm
+and prove its functional correctness.

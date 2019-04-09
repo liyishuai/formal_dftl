@@ -28,7 +28,7 @@ Proof.
   intros.
   subst; trivial.
 Qed.
-Implicit Arguments eq_sym [A n m].
+Arguments eq_sym [A n m].
 
 (* deprecated, use "neq_sym" instead *)
 Lemma neq_refl : forall n m : nat, n <> m -> m <> n.
@@ -36,7 +36,7 @@ Proof.
   intros.
   intro HF; subst; auto.
 Qed.
-Implicit Arguments neq_refl [n m].
+Arguments neq_refl [n m].
 
 Lemma neq_sym : forall {A: Type} (n m : A), n <> m -> m <> n.
 Proof.

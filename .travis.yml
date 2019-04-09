@@ -1,21 +1,39 @@
 language: c
-dist: trusty
-sudo: required
 
 os:
     - linux
     - osx
 
+before_install:
+- curl -L https://raw.githubusercontent.com/ocaml/ocaml-ci-scripts/master/.travis-ocaml.sh | sh
+
 install:
-    case $TRAVIS_OS_NAME in
-    osx)
-    brew update &&
-    brew install coq ;;
-    linux)
-    wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin &&
-    opam install coq -y &&
-    eval $(opam config env) ;;
-    esac
+- eval `opam config env`
+- opam update
+- opam upgrade
+- opam install coq
+
 script:
-    coq_makefile -f _CoqProject -o Makefile &&
     make -j > /dev/null
+
+env:
+  global:
+  - OCAML_VERSION=4.07
+  - NJOBS=2
+  - OPAMVERBOSE=1
+  - OPAMYES=true
+
+matrix:
+  fast_finish: true
+  allow_failures:
+  - os: osx
+
+before_cache:
+- if [ $TRAVIS_OS_NAME = osx ]; then brew cleanup; fi
+- opam clean
+
+cache:
+  apt: true
+  directories:
+  - $HOME/.opam
+  - $HOME/Library/Caches/Homebrew
